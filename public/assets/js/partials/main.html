@@ -1,0 +1,125 @@
+<div class="bg fullHeight" id="bg3">
+    <div class="bg-dark"></div>
+    <img ng-src="{{::backgroundData.secondBackground}}" ng-class="{'bg-animated' : isPlaying == 1}" />
+</div>
+<div class="bg fullHeight" id="bg2">
+    <div class="bg-dark"></div>
+    <img ng-src="{{::backgroundData.firstBackground}}" />
+</div>
+<div class="bg fullHeight" id="bg1">
+    <div class="bg-dark"></div>
+    <img src="assets/img/cover.jpg" />
+</div>
+<div class="container" ng-init="init()">
+    <div class="pane">
+        <div class="header">
+            <a href="/#/"><img src="assets/img/iccc.png" />
+            </a>
+            <div class="social-controls"><span class="social-header">Follow on</span><a href="https://www.facebook.com/suggst"><i class="fa fa-facebook fa-lg"></i></a><a href="https://twitter.com/suggstapp"><i class="fa fa-twitter fa-lg"></i></a><a href="https://plus.google.com/110329598617449962175/"><i class="fa fa-google-plus fa-lg"></i></a>
+            </div>
+        </div>
+        <div class="console">
+            <div class="line" id="line1">
+                <h1>Welcome, <span class="active">{{userName}}</span></h1>
+            </div>
+            <div class="line" id="line2">
+                <h1>I'm analyzing your <span class="active">Music Library</span>, please hold on ...</h1>
+                <div class="spinner" id="waitspinner"></div>
+            </div>
+            <div class="line" id="line3">
+                <h1 ng-bind-html="::consoleData.firstLine | toHtml"></h1>
+            </div>
+            <div class="line" id="line4">
+                <h1 ng-bind-html="::consoleData.secondLine | toHtml"></h1>
+            </div>
+            <div class="line" id="line5">
+                <h1 ng-bind-html="::consoleData.thirdLine | toHtml"></h1>
+            </div>
+            <div class="line recommend" id="line6">
+                <h1>I'd <span class="active">suggst</span> you listen to ...</h1>
+            </div>
+        </div>
+        <div class="suggest">
+            <div class="box">
+                <div class="box-inner">
+                    <div class="two-columns two-columns-img">
+                        <div class="img-main-holder">
+                            <img ng-src="{{suggestData.cover}}" />
+                        </div>
+                    </div>
+                    <div class="two-columns">
+                        <div class="text-holder">
+                            <div class="title">
+                                <h1><span class="active">{{::suggestData.title}}</span></h1>
+                                <h2>{{::suggestData.artist}} • {{::suggestData.album}}</h2>
+                            </div>
+                            <div class="controls">
+                                <div class="desktop">
+                                    <span ng-switch="isPlaying">
+                                                <span ng-switch-when="0"><img class="play" src="assets/img/controlls/play.png" ng-click="togglePlayback()" /></span>
+                                    <span ng-switch-when="1"><img class="play" src="assets/img/controlls/stop.png" ng-click="togglePlayback()" /></span>
+                                    <span ng-switch-when="2"><img class="play" src="assets/img/controlls/replay.png" ng-click="togglePlayback()" /></span>
+                                    </span>
+                                    <span ng-switch="inLibrary">
+                                                <span ng-switch-when="true"><a class="roundbutton saved" ng-click="saveTrack()">TRACK SAVED</a></span>
+                                    <span ng-switch-when="false"><a class="roundbutton" ng-click="saveTrack()">SAVE TRACK</a></span>
+                                    </span>
+                                    <a class="roundbutton roundbutton-share" ng-click="openInSpotify()">OPEN IN SPOTIFY</a>
+                                </div>
+                                <div class="mobile">
+                                    <span ng-switch="isPlaying">
+                                                <span ng-switch-when="0"><img class="play" src="assets/img/controlls/play.png" ng-click="togglePlayback()" /></span>
+                                    <span ng-switch-when="1"><img class="play" src="assets/img/controlls/stop.png" ng-click="togglePlayback()" /></span>
+                                    <span ng-switch-when="2"><img class="play" src="assets/img/controlls/replay.png" ng-click="togglePlayback()" /></span>
+                                    </span>
+                                    <span ng-switch="inLibrary">
+                                                <span ng-switch-when="true"><a class="roundbutton saved" ng-click="saveTrack()"><i class="fa fa-plus fa-lg"></i></a></span>
+                                    <span ng-switch-when="false"><a class="roundbutton" ng-click="saveTrack()"><i class="fa fa-plus fa-lg"></i></a></span>
+                                    </span>
+                                    <a class="roundbutton roundbutton-share" ng-click="openInSpotify()"><i class="fa fa-share fa-lg"></i></a>
+                                </div>
+                            </div>
+                            <div class="share">
+                                <div class="desktop">
+                                    <a class="roundbutton roundbutton-fb" ng-click="openFacebookPopup()">SHARE ON FACEBOOK</a>
+                                    <a class="roundbutton roundbutton-twitter popup" ng-click="openTwitterPopup()">SHARE ON TWITTER</a>
+                                </div>
+                                <div class="mobile">
+                                    <a class="roundbutton roundbutton-fb" ng-click="openFacebookPopup()"><i class="fa fa-facebook fa-lg share-i"></i>SHARE</a>
+                                    <a class="roundbutton roundbutton-twitter popup" ng-click="openTwitterPopup()"><i class="fa fa-twitter fa-lg share-i"></i>SHARE</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="controls-mobile">
+                <span ng-switch="isPlaying">
+                            <span ng-switch-when="0"><img class="play" src="assets/img/controlls/play.png" ng-click="togglePlayback()" /></span>
+                <span ng-switch-when="1"><img class="play" src="assets/img/controlls/stop.png" ng-click="togglePlayback()" /></span>
+                <span ng-switch-when="2"><img class="play" src="assets/img/controlls/replay.png" ng-click="togglePlayback()" /></span>
+                </span>
+                <span ng-switch="inLibrary">
+                            <span ng-switch-when="true"><a class="roundbutton saved" ng-click="saveTrack()"><i class="fa fa-plus fa-lg"></i></a></span>
+                <span ng-switch-when="false"><a class="roundbutton" ng-click="saveTrack()"><i class="fa fa-plus fa-lg"></i></a></span>
+                </span>
+                <a class="roundbutton roundbutton-share" ng-click="openInSpotify()"><i class="fa fa-share fa-lg"></i></a>
+            </div>
+            <div class="share-mobile">
+                <a class="roundbutton roundbutton-fb" href="#"><i class="fa fa-facebook fa-lg share-i"></i>SHARE</a>
+                <a class="roundbutton roundbutton-twitter" href="#"><i class="fa fa-twitter fa-lg share-i"></i>SHARE</a>
+            </div>
+            <div id="popup"></div>
+        </div>
+        <div class="bottom-bar">
+            <div class="item right">
+                <p>by <span class="active"><a class="me-link" href="http://marcinpraski.com/">Marcin Praski</a></span><span class="spacerr">|</span><span class="active"><a class="me-link" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V6ZKNHUYFAGRL">Donate</a></span>
+                </p>
+            </div>
+            <div class="item left">
+                <p><span class="active"><a class="me-link" href="http://suggst.net/assets/privacy.html">Privacy policy</a></span>
+            </div>
+        </div>
+    </div>
+</div>
